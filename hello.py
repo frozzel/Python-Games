@@ -1,3 +1,4 @@
+import random
 my_name = "Dennis"
 print("Hello, " + my_name + "!")
 
@@ -35,6 +36,14 @@ persnickety_count = 4.5684846
 # print(bmi)
 
 gold_oz =  32.1507
-gold_price = 3600
+gold_price = 2900
 current_gold_value = round(gold_oz * gold_price, 2)
 print(f'${current_gold_value:,}')
+
+
+random_number = random.randint(0, 1)
+print(random_number)
+if random_number == 1:
+    print("Heads")
+else:
+    print("Tails")
