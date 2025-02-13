@@ -1,7 +1,7 @@
 with open("treasure.txt") as file:
     contents = file.read()
     print(contents)
-    print("Welcome to Treasure Island")
+    print("\nWelcome to Treasure Island")
     print("Your mission is to find the treasure.")
     first_direction = input("You're at a cross road. Where do you want to go? Type 'left' or 'right'\n")
     if first_direction.lower() == "left":
