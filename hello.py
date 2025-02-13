@@ -18,18 +18,23 @@ persnickety_count = 4.5684846
 # print(int(3*(3 + 3)/3 - 3))
 # print(round(persnickety_count, 4))
 
-weight = 85
-height = 1.85
+# weight = 85
+# height = 1.85
 
-bmi = weight / (height ** 2)
+# bmi = weight / (height ** 2)
 
-# 🚨 Do not modify the values above
-# Write your code below 👇
-if bmi > 18.5 and bmi <= 25:
-    print("normal weight")
-if bmi < 18.5:
-    print("underweight")
-elif bmi > 25:
-    print("overweight")
+# # 🚨 Do not modify the values above
+# # Write your code below 👇
+# if bmi > 18.5 and bmi <= 25:
+#     print("normal weight")
+# if bmi < 18.5:
+#     print("underweight")
+# elif bmi > 25:
+#     print("overweight")
 
-print(bmi)
+# print(bmi)
+
+gold_oz =  32.1507
+gold_price = 3600
+current_gold_value = round(gold_oz * gold_price, 2)
+print(f'${current_gold_value:,}')
