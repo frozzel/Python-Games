@@ -27,4 +27,7 @@
 ```
 
 python3 main.py
+python3 -m pip install "SomeProject"
+
+
 
