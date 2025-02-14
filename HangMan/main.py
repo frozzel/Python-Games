@@ -32,6 +32,10 @@ correct_guess = []
 while not game_over:
     guess = input("Guess a letter: ").lower()
     display = ""
+    
+    if guess in correct_guess:
+        print("You already guessed that letter")
+        continue
     os.system("clear")
     for letter in chosen_word:
         if letter == guess:
@@ -42,6 +46,7 @@ while not game_over:
         else:
             display += "_" 
     if guess not in chosen_word:
+        print(f"{guess} is not in the word you lose a life")
         lives -= 1
         stage += 1  
     print(display)
@@ -50,6 +55,7 @@ while not game_over:
     
     if lives == 0:
         print("You Lose!")
+        print(f"The word was {chosen_word}")
         game_over = True
         with open("death.txt") as file:
             death = file.read()
