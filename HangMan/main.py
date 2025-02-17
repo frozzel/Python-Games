@@ -4,7 +4,7 @@ import os
 
 with open("hangman.txt") as file:
     content = file.read()
-    print(content)
+    print(F"\033[35m{content}\033[0m")
 
 # generate a random word
 def random_word():
@@ -13,7 +13,7 @@ def random_word():
     return word
 chosen_word = random_word()
 
-print(chosen_word)
+# print(chosen_word)
 # create placeholder
 
 placeholder = ""
@@ -59,7 +59,7 @@ while not game_over:
         game_over = True
         with open("death.txt") as file:
             death = file.read()
-            print(death)
+            print(f"\033[35m{death}\033[0m")
     if display == chosen_word:
         print("You Win!")
         game_over = True
