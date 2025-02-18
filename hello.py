@@ -36,7 +36,7 @@ persnickety_count = 4.5684846
 # print(bmi)
 
 gold_oz =  32.1507
-gold_price = 2900
+gold_price = 3100
 current_gold_value = round(gold_oz * gold_price, 2)
 print(f'${current_gold_value:,}')
 
