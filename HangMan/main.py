@@ -1,5 +1,5 @@
 from wonderwords import RandomWord
-from test import hangman
+from bugs import hangman
 import os
 
 with open("hangman.txt") as file:

@@ -1,4 +1,4 @@
-import test
+import bugs
 
 name = input('Enter your name: ')
-test.my_function(name)
+bugs.my_function(name)
