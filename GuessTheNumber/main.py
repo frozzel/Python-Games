@@ -24,7 +24,7 @@ def set_difficulty():
     else:
         print("Invalid input. Please try again.")
         return 0
-
+# start the game
 print(f"\033[35m{logo.logo}\033[0m")
 print("Welcome to the Number Guessing Game!")
 print("I'm thinking of a number between 1 and 100.")
@@ -33,8 +33,8 @@ difficulty = set_difficulty()
 attempts = difficulty
     
 number = random.randint(1, 100)
-# print(number)
-# guess = int(input("Make a guess: "))
+
+# logic for the game
 
 while attempts > 0:
     guess = int(input("Make a guess: "))
@@ -46,5 +46,3 @@ while attempts > 0:
         break
     print("Guess again.")
     print(f"You have \033[35m{attempts}\033[0m attempts remaining to guess the number.")
-    
-    
