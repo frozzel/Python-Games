@@ -21,6 +21,7 @@ for i in range(6):
     new_turtle.color(turtle_colors[i])
     new_turtle.penup()
     new_turtle.goto(x=-230, y=-100 + i * 40)
+    new_turtle.pendown()
     turtles.append(new_turtle)
 
 # Start the Race
