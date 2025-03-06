@@ -69,3 +69,8 @@ student_dict = {
 
 student_data = pd.DataFrame(student_dict)
 print(student_data)
+
+for (index, row) in student_data.iterrows():
+    print(row.student)
+    print(row.score)
+    
