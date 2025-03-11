@@ -1,5 +1,6 @@
 from tkinter import *
 import time
+import math
 
 # ---------------------------- CONSTANTS ------------------------------- #
 
@@ -12,6 +13,8 @@ FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
+REPS = 0
+timer = None
 
 window = Tk()
 
@@ -28,34 +31,59 @@ canvas.grid(column=1, row=1)
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 
+def reset_timer():
+    global timer
+    global REPS
+    REPS = 0
+    canvas.itemconfig(timer_text, text="00:00")
+    window.after_cancel(timer)
+    timer_label.config(text="Timer", fg=GREEN)
+    check_marks_label.config(text="")
+    
+
+
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start_timer(): 
-    count_down(5 * 60)
+    global REPS
+    work_sec = WORK_MIN * 60
+    short_break_sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
+    
+    REPS += 1
+    if REPS % 8 == 0:
+        count_down(long_break_sec)
+        timer_label.config(text="Break", fg=RED)
+    elif REPS % 2 == 0:
+        count_down(short_break_sec)
+        timer_label.config(text="Break", fg=PINK)
+    else:
+        count_down(work_sec)
+        timer_label.config(text="Work", fg=GREEN)
 
-def reset_timer():
-    canvas.itemconfig(timer_text, text="00:00")
-    window.after_cancel(count_down)
-    check_marks_label.config(text="")
+
     
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 count = 5
 
 def count_down(count):
-    count_min = count // 60
+    count_min = math.floor(count / 60)
     count_sec = count % 60
-    if count_sec == 0:
-        count_sec = "00"
-    elif count_sec < 10:
+    if count_sec < 10:
         count_sec = f"0{count_sec}"
     
     
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
-    if count == 0:
-        canvas.itemconfig(timer_text, text="Times Up!")    
-        return
+    if count > 0:
+        global timer
+        timer = window.after(1000, count_down, count - 1)
     else:
-        window.after(1000, count_down, count - 1) 
+        start_timer()
+        marks= ""
+        for _ in range(math.floor(REPS/2)):
+            marks += "✔"
+        check_marks_label.config(text=marks)
+        
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -67,7 +95,7 @@ timer_label.grid(column=1, row=0)
 
 
 ########## CHECK MARKS Label ##########
-check_marks_label = Label(text="✔", font=(FONT_NAME, 15, "bold"), bg=YELLOW, fg=GREEN)
+check_marks_label = Label(text="", font=(FONT_NAME, 15, "bold"), bg=YELLOW, fg=GREEN)
 check_marks_label.grid(column=1, row=3)
 
 ########## START Button ##########
