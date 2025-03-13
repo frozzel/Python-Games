@@ -48,6 +48,7 @@ while game_is_on:
         print(phonetic_code)
         play_again = input("Do you want to play again? (y/n): ").lower()
         if play_again == "n":
+            print("Thanks for playing!")
             game_is_on = False
         else:
             continue
