@@ -3,6 +3,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 import smtplib
+from email.mime.text import MIMEText
+
 
 # ----------------- Constants ----------------- #
 STOCK_NAME = "TSLA"
@@ -71,9 +73,10 @@ def send_email(quote):
     with  smtplib.SMTP('smtp.gmail.com', 587) as conn:
         conn.starttls()
         conn.login(user=my_email, password=my_password)
-        conn.sendmail(from_addr=my_email, to_addrs=send_to_email, msg=f"Subject:Stock News for {COMPANY_NAME}\n\n{quote}")
+        msg = MIMEText(f"Subject:Stock News for {COMPANY_NAME}\n\n{quote}")
+        conn.sendmail(from_addr=my_email, to_addrs=send_to_email, msg=msg.as_string())
     
-if stock_change >= 1:
+if stock_change >= 4:
    
     news = get_news()
 
