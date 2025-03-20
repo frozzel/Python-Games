@@ -76,7 +76,7 @@ def send_email(quote):
         msg = MIMEText(f"Subject:Stock News for {COMPANY_NAME}\n\n{quote}")
         conn.sendmail(from_addr=my_email, to_addrs=send_to_email, msg=msg.as_string())
     
-if stock_change >= 4:
+if stock_change >= 3:
    
     news = get_news()
 
