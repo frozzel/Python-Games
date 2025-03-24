@@ -1,4 +1,4 @@
-from amadeus import Client, ResponseError
+from amadeus import Client, Location, ResponseError
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -7,15 +7,16 @@ load_dotenv()
 
 amadeus = Client(
     client_id=os.getenv("AMADEUS_API_KEY"),
-    client_secret=os.getenv("AMADEUS_API_SECRET")
+    client_secret=os.getenv("AMADEUS_API_SECRET"), 
 )
 try:
-    response = amadeus.shopping.flight_offers_search.get(
-        originLocationCode="JFK",
-        destinationLocationCode="LAX",
-        departureDate="2025-04-01",
-        adults=1
-    )
+    '''
+    What's the airline name for the IATA code BA?
+    '''
+    response = amadeus.reference_data.airlines.get(airlineCodes='BA')
     print(response.data)
+
+except ValueError as e:
+    print("VALUE", e)
 except ResponseError as error:
-    print("ERROR",error)
+    print("RESPONSE",  error)
