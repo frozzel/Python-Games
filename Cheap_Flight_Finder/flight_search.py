@@ -3,6 +3,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 from datetime import datetime, timedelta
+import json
+
 
 # Get the client ID and client secret from the environment variables
 client_id = os.getenv("AMADEUS_API_KEY")
@@ -36,7 +38,9 @@ class FlightSearch:
         
         # Search for flight deals
         header = {
-            "Authorization": f"Bearer {access_token}"
+            "Authorization": f"Bearer {access_token}",
+            'Content-Type': 'application/json'
+
         }
         
         today = datetime.today()
@@ -44,14 +48,6 @@ class FlightSearch:
         formatted_date = future_date.strftime("%Y-%m-%d")
 
         for price in self.data.get("prices", []):
-            # parameters = {
-            #     "originLocationCode": "ATL",
-            #     "destinationLocationCode": price["iataCode"],
-            #     "departureDate": formatted_date,
-            #     "adults": 1,
-            #     "currencyCode": "USD",
-            #     "maxPrice": price["lowestPrice"]
-            # }
             
             parameters = {
                 "currencyCode": "USD",
@@ -61,8 +57,8 @@ class FlightSearch:
                         "originLocationCode": "ATL",
                         "destinationLocationCode": price["iataCode"],
                         "departureDateTimeRange": {
-                            "date": "2025-10-28",
-                            "time": "10:00:00"
+                            "dateWindow": "P6M",  # 6-month period; adjust as needed
+                            "date": formatted_date,
                         }
                     },
  
@@ -71,21 +67,22 @@ class FlightSearch:
                     {
                         "id": "1",
                         "travelerType": "ADULT",
-                        "fareOptions": [
-                            "STANDARD"
-                        ]
+   
                     }
                 ],
                 "sources": [
                     "GDS"
                 ],
                 "searchCriteria": {
-                    # "maxFlightOffers": 2,
-                    "maxPrice": price["lowestPrice"],
+                    "maxFlightOffers": 1,
+                    "flightFilters": {
+                "maxPrice": price["lowestPrice"]  # Filter by max price
+            }
+  
                 }
             }
 
-            response = requests.post(url="https://test.api.amadeus.com/v2/shopping/flight-offers", headers=header, data=parameters)
+            response = requests.post(url="https://test.api.amadeus.com/v2/shopping/flight-offers", headers=header, data=json.dumps(parameters))
             # response.raise_for_status()
             data = response.json()
             
