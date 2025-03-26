@@ -29,6 +29,24 @@ data_manager.update_destination_codes()
 
 # ==================== Search for Flights and Send Notifications ====================
 
+# print("Welcome to Flight Club! ")
+# print("We find the best flight deals and email them to you.")
+# firstname = input("What is your first name?")
+# lastname = input("What is your last name?")
+# email = input("What is your email?")
+# email_confirmation = input("Type your email again to confirm:")
+# if email == email_confirmation:
+#     print("You're in the club!")
+#     add_user = data_manager.add_user(firstname, lastname, email)
+#     print(add_user)
+# else:
+#     print("Emails do not match. Please try again.")
+#     exit()
+
+test_get_users = data_manager.get_users()
+print(test_get_users)
+
+
 tomorrow = datetime.now() + timedelta(days=1)
 six_month_from_today = datetime.now() + timedelta(days=(6 * 30))
 

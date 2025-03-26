@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SHEETY_PRICES_ENDPOINT = "https://api.sheety.co/4405a332b998aff756b6487fee262faf/flightDeals/prices"
+SHEETY_USER_ENDPOINT = "https://api.sheety.co/4405a332b998aff756b6487fee262faf/flightDeals/users"
 
 
 class DataManager:
@@ -44,3 +45,23 @@ class DataManager:
                 headers=self.header
             )
             # print(response.text)
+    def add_user(self, firstname, lastname, email):
+        new_data = {
+            "user": {
+                "firstName": firstname,
+                "lastName": lastname,
+                "email": email
+            }
+        }
+        response = requests.post(
+            url=SHEETY_USER_ENDPOINT,
+            json=new_data,
+            headers=self.header
+        )
+        # print(response.text)
+        return response.text
+    
+    def get_users(self):
+        response = requests.get(url=SHEETY_USER_ENDPOINT, headers=self.header)
+        data = response.json()
+        return data["users"]
