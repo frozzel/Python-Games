@@ -32,6 +32,7 @@ for link in soup.find_all(name='a', class_='property-card-link'):
 properties = []
 for i in range(len(addresses)):
     properties.append({
+        "index": i,
         "address": addresses[i],
         "price": prices[i],
         "link": links[i]
@@ -49,6 +50,8 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 driver.get(FORM)
 
 for property in properties:
+    print(f'Bot is input @{property['index']}... out of {len(properties)}')
+    
     time.sleep(2)
     address = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')
     price = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
@@ -65,5 +68,8 @@ for property in properties:
     
     do_another = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[4]/a')
     do_another.click()
-    
-    
+
+print("All properties have been submitted.")
+# Close the browser
+time.sleep(5)   
+driver.quit()
