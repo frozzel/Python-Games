@@ -29,5 +29,8 @@
 python3 main.py
 python3 -m pip install "SomeProject"
 
+console in chrome:
+document.body.contentEditable=true  
+
 
 
