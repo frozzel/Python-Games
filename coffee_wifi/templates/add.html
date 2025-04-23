@@ -1,0 +1,5 @@
+{% extends 'base.html' %} {% from 'bootstrap5/form.html' import render_form %} {% block title %}Add A New Cafe{% endblock %} {% block content %}
+Add a new cafe into the database
+{{ render_form(form, novalidate=True) }}
+See all cafes
+{% endblock %}
